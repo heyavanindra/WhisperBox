@@ -11,15 +11,15 @@ const Navbar = () => {
   const user: User = session?.user as User;
 
   return (
-    <nav className="p-4 md:p-6 shadow-md bg-white dark:bg-gray-800">
+    <nav className="p-4 md:p-6 shadow-lg bg-white dark:bg-gray-900 ">
       <div className="container mx-auto flex items-center justify-between">
         {/* Left Section: Logo */}
-        <a
+        <Link
           className="text-xl font-bold text-gray-900 dark:text-white"
-          href="#"
+          href={'/'}
         >
-          Mystry Message
-        </a>
+          WhisperBox
+        </Link>
 
         {/* Middle Section: Welcome Message */}
         <div className="hidden md:block text-center">
@@ -28,6 +28,8 @@ const Navbar = () => {
               Welcome, {user.username}
             </span>
           )}
+          
+          
         </div>
 
         {/* Right Section: Buttons */}
@@ -43,11 +45,14 @@ const Navbar = () => {
               >
                 Log out
               </Button>
+              
             </>
           ) : (
             <Link href={"signin"}>
               <Button className="w-full md:w-auto">Login</Button>
+
             </Link>
+            
           )}
           <ModeToggle />
         </div>
