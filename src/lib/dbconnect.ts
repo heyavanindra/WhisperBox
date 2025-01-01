@@ -19,7 +19,7 @@ async function dbconnect(): Promise<void> {
   console.log("connection successfully");
   
   } catch (error) {
-    console.log("error in connecting to db");
+    console.log("error in connecting to db",error);
     process.exit(1)
     
     

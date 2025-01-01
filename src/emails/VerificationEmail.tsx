@@ -28,7 +28,7 @@ const EmailTemplate: React.FC<Readonly<EmailVerificationProps>> = ({
       </a>{" "}
       to verify your account directly.
     </p>
-    <p>If you didn't request this, please ignore this email.</p>
+    <p>If you didn&apos;t request this, please ignore this email.</p>
     <br />
     <p>Best regards,</p>
     <p>The anonymouus team</p>
