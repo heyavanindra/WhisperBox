@@ -1,10 +1,12 @@
+import { AuroraBackgroundDemo } from "@/components/AroraBeam";
 
 
 export default function Home() {
   return (
    <>
    
-   hello world
+   
+   <AuroraBackgroundDemo></AuroraBackgroundDemo>
    </>
   );
 }
