@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
   let token;
 
   try {
-    token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+    token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET , secureCookie: true });
     console.log("Middleware Token:", token); // Debugging
   } catch (error) {
     console.error("Error retrieving token:", error);
