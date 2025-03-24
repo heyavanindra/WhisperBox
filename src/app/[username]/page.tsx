@@ -6,7 +6,7 @@ import axios, { AxiosError } from "axios";
 
 import React, { useEffect, useState } from "react";
 
-const messagepage = ({ params }: { params: {username:string} }) => {
+const Messagepage = ({ params }: { params: {username:string} }) => {
   const [IsAcceptingMessages, setIsAcceptingMessages] = useState(false);
   const [Message, setMessage] = useState("");
   const username = params.username;
@@ -37,7 +37,7 @@ const messagepage = ({ params }: { params: {username:string} }) => {
   }
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [IsAcceptingMessages]);
 
   return (
     <div>
@@ -58,4 +58,4 @@ const messagepage = ({ params }: { params: {username:string} }) => {
   );
 };
 
-export default messagepage;
+export default Messagepage;

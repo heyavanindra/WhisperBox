@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 import { authOption } from "../auth/[...nextauth]/options";
 import UserModel from "@/model/User";
 import { User } from "next-auth";
-import { NextRequest } from "next/server";
 export async function POST(request: Request) {
   await dbconnect();
 
@@ -49,7 +48,6 @@ export async function POST(request: Request) {
       message: "message accept status updated successfully",
     });
   } catch (error) {
-    console.log("failed to update user status to accept messages");
 
     return Response.json(
       {
