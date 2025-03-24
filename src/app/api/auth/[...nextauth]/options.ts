@@ -4,6 +4,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
+
 export const authOption: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -12,6 +13,7 @@ export const authOption: NextAuthOptions = {
       credentials: {
         username: { lable: "username", type: "text", placeholder: "avi" },
       },
+     
       async authorize(credentials: any): Promise<any> {
         await dbconnect();
         try {
@@ -71,7 +73,7 @@ export const authOption: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: "helloworld",
+  secret: process.env.NEXTAUTH_SECRET,
   
   
 };

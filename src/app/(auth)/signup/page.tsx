@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Link from "next/link";
-import { signupValidaton, usernameValidation } from "@/schemas/signUpSchema";
+import { signupValidaton  } from "@/schemas/signUpSchema";
 import { useDebounceCallback } from "usehooks-ts";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,6 @@ import { ApiResponse } from "@/types/ApiResponse";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,10 +21,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-
-const formSchema = z.object({
-  username: usernameValidation,
-});
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -81,7 +76,7 @@ const Signup = () => {
     } catch (error) {
       console.log("Error in signup of user", error);
       const axiosError = error as AxiosError<ApiResponse>;
-      let errorMessage = axiosError.response?.data.message;
+      const errorMessage = axiosError.response?.data.message;
       toast({
         title: "signup failed ",
         description: errorMessage,

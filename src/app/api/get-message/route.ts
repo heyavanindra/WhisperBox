@@ -4,7 +4,7 @@ import { authOption } from "../auth/[...nextauth]/options";
 import mongoose from "mongoose";
 import UserModel from "@/model/User";
 
-export async function GET(request: Request) {
+export async function GET() {
   await dbconnect();
   const session = await getServerSession(authOption);
 
@@ -55,6 +55,7 @@ export async function GET(request: Request) {
       }
     );
   } catch (error) {
+    console.log(error);
     return Response.json(
       {
         success: false,

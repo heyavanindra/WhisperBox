@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import './globals.css'
 import { ThemeProvider } from "@/components/theme-provider";
 import AuthProvider from "./AuthProvider";
-import Navbar from "./components/Navbar";
+import Navbar from "@/components/Navbar";
 
 
 export const metadata: Metadata = {

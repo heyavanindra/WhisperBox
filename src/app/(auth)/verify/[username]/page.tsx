@@ -14,7 +14,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const verifyAccount = () => {
+const VerifyAccount = () => {
   const route = useRouter();
   const params = useParams();
   const { toast } = useToast();
@@ -37,7 +37,7 @@ const verifyAccount = () => {
     } catch (error) {
       console.error("error in verify code", error);
       const axiosError = error as AxiosError<ApiResponse>;
-      let errorMessage = axiosError.response?.data.message;
+      const errorMessage = axiosError.response?.data.message;
       toast({
         title: "signup failed",
         description: errorMessage,
@@ -96,4 +96,4 @@ const verifyAccount = () => {
 </div>;
 };
 
-export default verifyAccount;
+export default VerifyAccount;

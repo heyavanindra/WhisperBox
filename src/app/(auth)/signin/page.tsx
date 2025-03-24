@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -12,7 +11,6 @@ import { useRouter } from "next/navigation";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,7 +18,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
 import { signInValidationSchema } from "@/schemas/signInSchema";
 import { signIn } from "next-auth/react";
 
@@ -123,7 +120,7 @@ const Signin = () => {
           </Form>
 
           <p>
-            Don't have Account?{" "}
+            Don&apos;t have Account?{" "}
             <Link
               href={"/signup"}
               className="text-blue-500 hover:text-blue-800"

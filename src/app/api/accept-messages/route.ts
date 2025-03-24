@@ -48,61 +48,7 @@ export async function POST(request: Request) {
       message: "message accept status updated successfully",
     });
   } catch (error) {
-
-    return Response.json(
-      {
-        success: false,
-        message: "failed to update user status to accept messages",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
-}
-
-export async function name(request: Request) {
-  dbconnect();
-  const session = await getServerSession(authOption);
-  const user: User = session?.user as User;
-  if (!session || session.user) {
-    return Response.json(
-      {
-        success: false,
-        message: "not authenticated",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
-
-  const userId = user._id;
-  try {
-    const foundUser = await UserModel.findById(userId, {});
-    if (!foundUser) {
-      return Response.json(
-        {
-          success: false,
-          message: "user not found",
-        },
-        {
-          status: 404,
-        }
-      );
-    }
-    return Response.json(
-      {
-        success: true,
-        isAcceptingMessages: foundUser.isAcceptingMessage,
-      },
-      {
-        status: 500,
-      }
-    );
-  } catch (error) {
-    console.log("failed to update user status to accept messages");
-
+console.log(error)
     return Response.json(
       {
         success: false,

@@ -1,12 +1,10 @@
-import React from "react";
-import {
-  Card,
-  CardContent,
- 
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+'use client'
 
+import React from 'react';
+import axios, { AxiosError } from 'axios';
+import dayjs from 'dayjs';
+import { X } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,40 +15,44 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import axios, { AxiosError } from "axios";
-import { ApiResponse } from "@/types/ApiResponse";
-import { Message } from "@/model/User";
+} from '@/components/ui/alert-dialog';
+import { Button } from './ui/button';
 
-interface MessageCardProps {
+import { ApiResponse } from '@/types/ApiResponse';
+import { useToast } from '@/hooks/use-toast';
+import { Message } from '@/model/User';
+
+
+type MessageCardProps = {
   message: Message;
-  onMessageDelete: (messageId:string) => void;
-}
+  onMessageDelete: (messageId: string) => void;
+};
 
+export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
+  const { toast } = useToast();
 
-
-
-const MessageCard = ({message , onMessageDelete}:MessageCardProps) => {
-  const {toast} = useToast();
-
-  const handleDelete = async (messageId:string) => {
+  const handleDeleteConfirm = async () => {
     try {
-      const response = await axios.delete<ApiResponse>(`/api/deletemessage/${messageId}`)
+      const response = await axios.delete<ApiResponse>(
+        `/api/delete-message/${message._id}`
+      );
       toast({
-        title:response.data.message
-      })
-    } catch (error) {
-      const axiosError = error as AxiosError<ApiResponse>
-      toast({
-        title:axiosError.response?.data.message
-      })
-    }
+        title: response.data.message,
+      });
       
-     
-   }
+      onMessageDelete(message._id);
+
+    } catch (error) {
+      const axiosError = error as AxiosError<ApiResponse>;
+      toast({
+        title: 'Error',
+        description:
+          axiosError.response?.data.message ?? 'Failed to delete message',
+        variant: 'destructive',
+      });
+    } 
+  };
+
   return (
     <Card className="card-bordered">
       <CardHeader>
@@ -74,7 +76,7 @@ const MessageCard = ({message , onMessageDelete}:MessageCardProps) => {
                 <AlertDialogCancel>
                   Cancel
                 </AlertDialogCancel>
-                <AlertDialogAction onClick={handleDelete}>
+                <AlertDialogAction onClick={handleDeleteConfirm}>
                   Continue
                 </AlertDialogAction>
               </AlertDialogFooter>
@@ -82,12 +84,10 @@ const MessageCard = ({message , onMessageDelete}:MessageCardProps) => {
           </AlertDialog>
         </div>
         <div className="text-sm">
-          Date Impliment
+          {dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}
         </div>
       </CardHeader>
       <CardContent></CardContent>
     </Card>
   );
-};
-
-export default MessageCard;
+}

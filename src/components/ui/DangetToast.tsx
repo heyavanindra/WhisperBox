@@ -4,7 +4,7 @@ interface toastProps {
   title :string,
   description :string
 }
-const DangerToast = ({title, description}: toastProps) => {
+const DangerToast = ({title }: toastProps) => {
   return (
     <div>
       <div
