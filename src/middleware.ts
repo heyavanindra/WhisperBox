@@ -1,14 +1,21 @@
-import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
   let token;
 
   try {
-    token = await getToken({ req: request });
+    token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+    console.log("Middleware Token:", token); // Debugging
   } catch (error) {
     console.error("Error retrieving token:", error);
+  }
+
+  if (token) {
+    console.log("User authenticated");
+  } else {
+    console.log("No token found, redirecting to signin");
   }
 
   if (
@@ -19,11 +26,7 @@ export async function middleware(request: NextRequest) {
       url.pathname === "/")
   ) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
-  }else if (!token && (url.pathname.startsWith("/dashboard"))) {
+  } else if (!token && url.pathname.startsWith("/dashboard")) {
     return NextResponse.redirect(new URL("/signin", request.url));
   }
 }
-
-export const config = {
-  matcher: ["/signin", "/signup", "/verify", "/", "/dashboard/:path*"],
-};
