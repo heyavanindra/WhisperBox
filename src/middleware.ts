@@ -1,22 +1,21 @@
-import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
   let token;
 
   try {
-    token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET  });
-    console.log("Middleware Token:", token); // Debugging
+    token = await getToken({
+      req: request,
+      secret: process.env.NEXTAUTH_SECRET,
+      secureCookie: request.headers.get("x-forwarded-proto") === "https", // Only secure on production
+    });
   } catch (error) {
     console.error("Error retrieving token:", error);
   }
 
-  if (token) {
-    console.log("User authenticated");
-  } else {
-    console.log("No token found, redirecting to signin");
-  }
+  console.log("Middleware Token:", token); // Debugging
 
   if (
     token &&
@@ -30,3 +29,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/signin", request.url));
   }
 }
+
+export const config = {
+  matcher: ["/signin", "/signup", "/verify", "/", "/dashboard/:path*"],
+  runtime: "nodejs", // Ensures compatibility with server functions
+};
