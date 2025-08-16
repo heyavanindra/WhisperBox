@@ -31,7 +31,7 @@ export async function POST(request: Request) {
       email,
     });
    
-    const verifyCode = await getRandomFourDigitNumber().toString()
+    const verifyCode =  getRandomFourDigitNumber().toString()
 
 
 
