@@ -67,7 +67,7 @@ export async function POST(request: Request) {
       verifyCode
     );
 
-    if (!emailResponse.success) {
+    if (emailResponse.success == false) {
       return Response.json(
         {
           success: false,
@@ -80,6 +80,8 @@ export async function POST(request: Request) {
     return Response.json({
       success: true,
       message: "Email send successfully",
+    },{
+      status:201
     });
   } catch {
     console.error("error in sign up section");

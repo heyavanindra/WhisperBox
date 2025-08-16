@@ -10,14 +10,15 @@ export async function sendVerificationEmail(
   verifyCode: string,
 ): Promise<ApiResponse> {
     try {
-        await resend.emails.send({
+      const resendResponse =  await resend.emails.send({
             from: 'whisper@whisper.aviii.xyz',
             to:email,
             subject: 'anonymous message email verification',
             react: EmailTemplate({username,verifyCode}),
           });
+
+          console.log("Response True",resendResponse)
         return{
-            
             success:true,
             message:"verificaton email send successfully"
         }
