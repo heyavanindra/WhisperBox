@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={` fixed left-1/2 transform -translate-x-1/2 px-6 py-3 md:px-8 md:py-4   bg-transparent z-50 w-[90%] md:max-w-7xl flex items-center justify-between`}
+      className={` fixed left-1/2 transform -translate-x-1/2  py-3 md:px-8 md:py-4   bg-transparent z-50 w-[90%] md:max-w-7xl flex items-center justify-between`}
     >
       <div className="container mx-auto flex items-center justify-between">
         {/* Left Section: Logo */}
