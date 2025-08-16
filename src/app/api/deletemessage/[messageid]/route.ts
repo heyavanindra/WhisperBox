@@ -28,10 +28,9 @@ export async function DELETE(
         _id: _user._id,
       },
       {
-        $pull: { message: { _id: messageId } },
+        $pull: { messages: { _id: messageId } },
       }
     );
-
     if (updateResult.modifiedCount == 0) {
        return Response.json({
         success:false,

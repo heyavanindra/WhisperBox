@@ -17,13 +17,9 @@ export async function GET(request: Request) {
     };
     // validate with zod
     const result = usernameQuerySchema.safeParse(quetyParam);
-    console.log("log in check validation");
-    console.log(result); // TODO remove
+
 
     if (!result.success) {
-      const usernameError = result.error.format().username?._errors || [];
-      console.log(usernameError);
-      
 
       return Response.json(
         {
@@ -63,7 +59,7 @@ export async function GET(request: Request) {
     
     
   } catch (error) {
-    console.log("error in check username validation route", error);
+    console.error("error in check username validation route", error);
     return Response.json(
       {
         success: false,

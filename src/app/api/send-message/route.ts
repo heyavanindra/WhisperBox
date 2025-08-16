@@ -5,11 +5,10 @@ export async function POST(request: Request) {
   await dbconnect();
   const { username, content } = await request.json();
   const paramUser = username
-   console.log(paramUser)
+  
   
   try {
     const user = await UserModel.findOne({ username:paramUser });
-    console.log(user);
     if (!user) {
       return Response.json(
         {
@@ -54,8 +53,8 @@ export async function POST(request: Request) {
       }
     );
   } catch (error) {
-    console.log(error)
-    console.log("something went wrong in send message route");
+    console.error(error)
+    console.error("something went wrong in send message route");
     return Response.json(
       {
         success: false,

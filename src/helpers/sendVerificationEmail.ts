@@ -2,6 +2,8 @@ import EmailTemplate from "@/emails/VerificationEmail";
 import { resend } from "@/lib/resend";
 import { ApiResponse } from "@/types/ApiResponse";
 
+
+
 export async function sendVerificationEmail(
   email: string,
   username: string,
@@ -9,7 +11,7 @@ export async function sendVerificationEmail(
 ): Promise<ApiResponse> {
     try {
         await resend.emails.send({
-            from: 'Acme <onboarding@resend.dev>',
+            from: 'whisper@whisper.aviii.xyz',
             to:email,
             subject: 'anonymous message email verification',
             react: EmailTemplate({username,verifyCode}),
@@ -20,7 +22,7 @@ export async function sendVerificationEmail(
             message:"verificaton email send successfully"
         }
     } catch (emailerror) {
-        console.log("error while sending email");
+        console.error("error while sending email");
         console.error(emailerror)
         return{
             success:false,

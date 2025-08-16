@@ -6,6 +6,7 @@ import { User } from "next-auth";
 export async function POST(request: Request) {
   await dbconnect();
 
+
   const session = await getServerSession(authOption);
   const user: User = session?.user as User;
 
@@ -25,10 +26,11 @@ export async function POST(request: Request) {
 
   const { acceptMessages } = await request.json();
   try {
-    const updatedUser = await UserModel.findById(
-      userId,
-      { isAcceptingMessage: acceptMessages },
-      { new: true }
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      userId,{
+        isAcceptingMessage:acceptMessages
+      },
+      {new:true}
     );
 
     if (!updatedUser) {
@@ -43,12 +45,12 @@ export async function POST(request: Request) {
       );
     }
 
-   return Response.json({
+    return Response.json({
       success: true,
       message: "message accept status updated successfully",
     });
   } catch (error) {
-console.log(error)
+    console.log(error);
     return Response.json(
       {
         success: false,
@@ -59,4 +61,45 @@ console.log(error)
       }
     );
   }
+}
+
+
+
+export async function GET(request: Request) {
+  await dbconnect();
+
+  const session = await getServerSession(authOption);
+  if (!session || !session.user) {
+    return Response.json(
+      {
+        success: false,
+        message: "not authenticated",
+      },
+      {
+        status: 405,
+      }
+    );
+  }
+
+  const user: User = session?.user as User;
+  try {
+    const userFound = await UserModel.findById(user?._id);
+    const isAcceptingMessage = userFound?.isAcceptingMessage;
+    return Response.json(
+      {
+        success: true,
+        isAcceptingMessages: isAcceptingMessage,
+      },
+      {
+        status: 200,
+      }
+    );
+  } catch (error) {
+    console.error(error)
+    return Response.json({
+      success:500,
+      message:"Error in accept message route",
+    })
+  }
+
 }

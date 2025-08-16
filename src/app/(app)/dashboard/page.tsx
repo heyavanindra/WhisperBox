@@ -58,11 +58,7 @@ const Dashboard = () => {
       setIsSwitchLoading(false);
       try {
         const response = await axios.get<ApiResponse>("/api/get-message");
-        setMessages(response.data.messages || []);
-        console.log(response.data)
-        
-
-        
+        setMessages(response.data.messages || []);        
         if (refresh) {
           toast({
             title: "Success",
@@ -99,7 +95,7 @@ const Dashboard = () => {
     const response =  await axios.post<ApiResponse>('/api/accept-messages', {
         acceptMessages :!acceptMessages
       })
-      setValue('acceptMessage',!acceptMessages)
+      setValue('acceptMessages',!acceptMessages)
       toast({
         title:response.data.message,
         variant:"default"
@@ -107,8 +103,7 @@ const Dashboard = () => {
     } catch (error) {
       console.log(error)
       const axiosError = error as AxiosError<ApiResponse>;
-      console.log(axiosError)
-       toast({
+      toast({
         title:"Error",
         description:axiosError.response?.data.message || "failed to fetch message settings",
         variant:"destructive"

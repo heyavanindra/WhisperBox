@@ -7,15 +7,12 @@ export async function middleware(request: NextRequest) {
 
   try {
     token = await getToken({
-      req: request,
-      secret: process.env.NEXTAUTH_SECRET,
-      secureCookie: request.headers.get("x-forwarded-proto") === "https", // Only secure on production
+      req:request
     });
   } catch (error) {
     console.error("Error retrieving token:", error);
   }
 
-  console.log("Middleware Token:", token); // Debugging
 
   if (
     token &&
@@ -32,5 +29,4 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: ["/signin", "/signup", "/verify", "/", "/dashboard/:path*"],
-  runtime: "nodejs", // Ensures compatibility with server functions
 };
