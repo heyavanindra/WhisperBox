@@ -4,6 +4,9 @@ import UserModel from "@/model/User";
 import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
 
+
+export const runtime = "nodejs";
+
 export async function POST(request: Request) {
   await dbconnect();
 
