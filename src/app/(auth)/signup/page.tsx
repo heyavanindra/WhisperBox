@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Link from "next/link";
-import { signupValidaton  } from "@/schemas/signUpSchema";
+import { signupValidaton } from "@/schemas/signUpSchema";
 import { useDebounceCallback } from "usehooks-ts";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
@@ -35,7 +35,7 @@ const Signup = () => {
     resolver: zodResolver(signupValidaton),
     defaultValues: {
       username: "",
-      email:"",
+      email: "",
       password: "",
     },
   });
@@ -86,99 +86,138 @@ const Signup = () => {
     }
   };
   return (
-    <div className=" flex justify-center items-center min-h-screen bg-slate-100 dark:bg-black dark:text-white">
-      <div className="w-full mt-28 max-w-md p-8 space-y-8 bg-white dark:bg-slate-900  rounded-lg shadow-md">
-        <div className="text-center">
-          <h1 className="text-2xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            {" "}
-            sign up to start your anomynous Adventure
-          </h1>
-        </div>
-        <div>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 ">
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="UserName"
-                        {...field}
-                        onChange={(e) => {
-                          field.onChange(e);
-                          debounced(e.target.value);
-                        }}
-                      />
-                    </FormControl>
-                    {isCheckingUsername && (
-                      <Loader2 className="animate-spin"></Loader2>
-                    )}
-                    <p className={`text-sm ${usernameMesssage === 'UserName is available' ? 'text-green-500' : 'text-red-600'}`}>{usernameMesssage}</p>
+  <div className=" flex justify-center items-center min-h-screen dark:text-white">
+  <div className="absolute inset-0 -z-10 bg-[image:radial-gradient(80%_50%_at_50%_-20%,hsl(206,81.9%,65.3%,0.5),rgba(255,255,255,0))]"></div>
+  <svg
+    className="absolute inset-0 -z-10 h-full w-full stroke-white/5 [mask-image:radial-gradient(75%_50%_at_top_center,white,transparent)]"
+    aria-hidden="true"
+  >
+    <defs>
+      <pattern
+        id="hero"
+        width="80"
+        height="80"
+        x="50%"
+        y="-1"
+        patternUnits="userSpaceOnUse"
+      >
+        <path d="M.5 200V.5H200" fill="none"></path>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" strokeWidth="0" fill="url(#hero)"></rect>
+  </svg>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Email" {...field} />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>password</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Password"
-                        {...field}
-                        type="password"
-                      />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" disabled={isSubmiting}>
-                {isSubmiting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin"></Loader2>{" "}
-                    Please Wait...
-                  </>
-                ) : (
-                  "Sign Up"
-                )}
-              </Button>
-            </form>
-          </Form>
-
-          <p>
-            Already a member?{" "}
-            <Link
-              href={"/signin"}
-              className="text-blue-500 hover:text-blue-800"
-            >
-              Sign In
-            </Link>
-          </p>
-        </div>
-      </div>
+  {/* Signup Card */}
+  <div className="w-full max-w-md p-10 space-y-8 bg-background border border-primary/20 rounded-2xl shadow-xl backdrop-blur-sm">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold tracking-tight lg:text-4xl mb-4">
+        Sign up to start your anonymous adventure
+      </h1>
     </div>
+
+    <div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm font-medium">Username</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your username"
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      debounced(e.target.value);
+                    }}
+                    className="rounded-xl"
+                  />
+                </FormControl>
+                {isCheckingUsername && (
+                  <Loader2 className="animate-spin mt-1 h-4 w-4 text-muted-foreground" />
+                )}
+                <p
+                  className={`text-sm mt-1 ${
+                    usernameMesssage === "UserName is available"
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {usernameMesssage}
+                </p>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm font-medium">Email</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your email"
+                    {...field}
+                    className="rounded-xl"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm font-medium">Password</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your password"
+                    {...field}
+                    type="password"
+                    className="rounded-xl"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button
+            type="submit"
+            disabled={isSubmiting}
+            className="w-full rounded-xl py-2 font-medium"
+          >
+            {isSubmiting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please Wait...
+              </>
+            ) : (
+              "Sign Up"
+            )}
+          </Button>
+        </form>
+      </Form>
+
+      <p className="text-center text-sm text-muted-foreground mt-6">
+        Already a member?{" "}
+        <Link
+          href={"/signin"}
+          className="text-blue-500 hover:text-blue-700 font-medium"
+        >
+          {isSubmiting?"Submitting":"Sign In"}
+        </Link>
+      </p>
+    </div>
+  </div>
+</div>
+
   );
 };
 

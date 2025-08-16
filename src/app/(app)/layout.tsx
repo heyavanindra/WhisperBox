@@ -9,7 +9,7 @@ export default function Layout({
   return (
     <>
    
-    <main>{children}</main>
+    <main >{children}</main>
     </>
   );
 }
