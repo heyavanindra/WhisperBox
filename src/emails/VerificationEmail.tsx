@@ -23,10 +23,10 @@ const EmailTemplate: React.FC<Readonly<EmailVerificationProps>> = ({
     </p>
     <p>
       If you prefer, you can{" "}
-      <a href="#" style={{ color: "#007bff", textDecoration: "none" }}>
+      <a href={`https://whisper.aviii.xyz/verify/heyavanindra`} style={{ color: "#007bff", textDecoration: "none" }}>
         click here
       </a>{" "}
-      to verify your account directly.
+      to verify your account.
     </p>
     <p>If you didn&apos;t request this, please ignore this email.</p>
     <br />

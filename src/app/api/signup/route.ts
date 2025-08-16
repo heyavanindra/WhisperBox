@@ -2,10 +2,13 @@ import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
 import dbconnect from "@/lib/dbconnect";
 import UserModel from "@/model/User";
 import bcrypt from "bcryptjs";
-import { v4 as uuidv4 } from "uuid";
 
 
 export const runtime = "nodejs";
+
+ function getRandomFourDigitNumber() {
+  return Math.floor(1000 + Math.random() * 9000);
+}
 
 export async function POST(request: Request) {
   await dbconnect();
@@ -27,7 +30,11 @@ export async function POST(request: Request) {
     const existingUserByEmail = await UserModel.findOne({
       email,
     });
-    const verifyCode = await uuidv4();
+   
+    const verifyCode = await getRandomFourDigitNumber().toString()
+
+
+
 
     if (existingUserByEmail) {
       if (existingUserByEmail.isVerified) {
