@@ -89,7 +89,7 @@ const Signup = () => {
   <div className=" flex justify-center items-center min-h-screen dark:text-white">
   <div className="absolute inset-0 -z-10 bg-[image:radial-gradient(80%_50%_at_50%_-20%,hsl(206,81.9%,65.3%,0.5),rgba(255,255,255,0))]"></div>
   <svg
-    className="absolute inset-0 -z-10 h-full w-full stroke-white/5 [mask-image:radial-gradient(75%_50%_at_top_center,white,transparent)]"
+    className="absolute inset-0 -z-10 h-full w-full dark:stroke-white/5 stroke-black/5 [mask-image:radial-gradient(75%_50%_at_top_center,white,transparent)]"
     aria-hidden="true"
   >
     <defs>
@@ -108,7 +108,7 @@ const Signup = () => {
   </svg>
 
   {/* Signup Card */}
-  <div className="w-full max-w-md p-10 space-y-8 bg-background border border-primary/20 rounded-2xl shadow-xl backdrop-blur-sm">
+  <div className="w-full max-sm:mt-20 max-w-md p-10 max-sm:mx-3 space-y-8 bg-background border border-primary/20 rounded-2xl shadow-xl backdrop-blur-sm">
     <div className="text-center">
       <h1 className="text-3xl font-bold tracking-tight lg:text-4xl mb-4">
         Sign up to start your anonymous adventure

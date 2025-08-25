@@ -131,7 +131,7 @@ const Dashboard = () => {
 
   return (
     <div className="pt-20 md:pt-28 min-h-screen w-full px-4 sm:px-6">
-      <div className="my-6 mx-auto p-6 sm:p-8 bg-background border border-primary/20 rounded-2xl shadow-lg backdrop-blur-sm w-full max-w-6xl">
+      <div className="my-6 max-sm:mt-20 pt-20 sm:pt-8  mx-auto p-6 sm:p-8 bg-background border border-primary/20 rounded-2xl shadow-lg backdrop-blur-sm w-full max-w-6xl">
         <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center md:text-left">
           User Dashboard
         </h1>

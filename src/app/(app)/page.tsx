@@ -5,7 +5,7 @@ export default function Home() {
     <section className="flex flex-col items-center justify-center h-screen">
       <div className="absolute inset-0 -z-10 bg-[image:radial-gradient(80%_50%_at_50%_-20%,hsl(206,81.9%,65.3%,0.5),rgba(255,255,255,0))]"></div>
       <svg
-        className="absolute inset-0 -z-10 h-full w-full stroke-white/5 [mask-image:radial-gradient(75%_50%_at_top_center,white,transparent)]"
+        className="absolute inset-0 -z-10 h-full w-full stroke-black/5 dark:stroke-white/5 [mask-image:radial-gradient(75%_50%_at_top_center,white,transparent)]"
         aria-hidden="true"
       >
         <defs>
