@@ -3,7 +3,7 @@
 import React from 'react';
 import axios, { AxiosError } from 'axios';
 import dayjs from 'dayjs';
-import { X } from 'lucide-react';
+import { Trash } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   AlertDialog,
@@ -61,10 +61,10 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant='destructive'>
-                <X className="w-5 h-5" />
+                <Trash className="w-5 h-5" />
               </Button>
             </AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent >
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                 <AlertDialogDescription>
@@ -76,7 +76,7 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
                 <AlertDialogCancel>
                   Cancel
                 </AlertDialogCancel>
-                <AlertDialogAction onClick={handleDeleteConfirm}>
+                <AlertDialogAction className='bg-red-600 text-white' onClick={handleDeleteConfirm}>
                   Continue
                 </AlertDialogAction>
               </AlertDialogFooter>

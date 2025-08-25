@@ -10,7 +10,7 @@ import { acceptMessageValidationSchema } from "@/schemas/acceptMessageSchema";
 import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
-import { Loader2, RefreshCcw } from "lucide-react";
+import { Loader2, RefreshCcw ,Copy } from "lucide-react";
 import { User } from "next-auth";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
@@ -131,7 +131,7 @@ const Dashboard = () => {
 
   return (
     <div className="pt-20 md:pt-28 min-h-screen w-full px-4 sm:px-6">
-      <div className="my-6 max-sm:mt-20 pt-20 sm:pt-8  mx-auto p-6 sm:p-8 bg-background border border-primary/20 rounded-2xl shadow-lg backdrop-blur-sm w-full max-w-6xl">
+      <div className="my-6 max-sm:mt-10 pt-20 sm:pt-8  mx-auto p-6 sm:p-8 bg-background border border-primary/20 rounded-2xl shadow-lg backdrop-blur-sm w-full max-w-6xl">
         <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center md:text-left">
           User Dashboard
         </h1>
@@ -150,9 +150,9 @@ const Dashboard = () => {
             />
             <Button
               onClick={copyToClipboard}
-              className="rounded-xl w-full sm:w-auto"
+              className="rounded-xl w-full flex gap-x-3 sm:w-auto"
             >
-              Copy
+             <Copy></Copy> Copy
             </Button>
           </div>
         </div>
